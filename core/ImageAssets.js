@@ -1,4 +1,4 @@
-const cardAssets = {
+const imageAssets = {
     'AC': {
         uri: require('../assets/images/cards/AC.png')
     },
@@ -155,11 +155,8 @@ const cardAssets = {
     'JS': {
         uri: require('../assets/images/cards/JS.png')
     },
-    'RED_BACK': {
-        uri: require('../assets/images/cards/RED_BACK.png')
-    },
-    'BLUE_BACK': {
-        uri: require('../assets/images/cards/BLUE_BACK.png')
+    'BACK': {
+        uri: require('../assets/images/cards/BACK.png')
     },
     'BLUE': {
         uri: require('../assets/images/chips/BLUE.png')
@@ -169,4 +166,4 @@ const cardAssets = {
     }
 };
 
-export default cardAssets;
+export default imageAssets;

@@ -12,7 +12,6 @@ export default class App extends React.Component {
         <View style={styles.boardContainer}>
           <Board></Board>
         </View>
-        <View style={styles.footer}></View>
       </View>
     );
   }
@@ -21,7 +20,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: '#775e67',
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -29,7 +28,8 @@ const styles = StyleSheet.create({
     flexBasis: '4%',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    margin: 10,
   },
   title: {
     fontSize: 24,
@@ -39,10 +39,6 @@ const styles = StyleSheet.create({
   },
   boardContainer: {
     flexBasis: '80%',
-    width: '100%'
-  },
-  footer:{
-    flexBasis: '16%',
     width: '100%'
   }
 });

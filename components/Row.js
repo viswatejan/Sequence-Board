@@ -4,7 +4,7 @@ import Card from './Card';
 
 export default class Row extends React.Component {
     render() {
-        cards = this.props.cards.map((card) => <Card key={card} type={card}></Card>);
+        cards = this.props.cards.map((card) => <Card key={card.id} card={card}></Card>);
         return (
             <View style={styles.row}>
                 {cards}
@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         alignItems: 'flex-start',
-        justifyContent: 'center',
-        borderWidth: 2,
+        justifyContent: 'center'
     }
 });

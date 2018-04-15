@@ -160,6 +160,12 @@ const cardAssets = {
     },
     'BLUE_BACK': {
         uri: require('../assets/images/cards/BLUE_BACK.png')
+    },
+    'BLUE': {
+        uri: require('../assets/images/chips/BLUE.png')
+    },
+    'GREEN': {
+        uri: require('../assets/images/chips/GREEN.png')
     }
 };
 

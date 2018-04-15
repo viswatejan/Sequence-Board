@@ -12,6 +12,7 @@ export default class App extends React.Component {
         <View style={styles.boardContainer}>
           <Board></Board>
         </View>
+        <View style={styles.footer}></View>
       </View>
     );
   }
@@ -37,7 +38,11 @@ const styles = StyleSheet.create({
     marginRight: 10 
   },
   boardContainer: {
-    flexBasis: '96%',
+    flexBasis: '80%',
+    width: '100%'
+  },
+  footer:{
+    flexBasis: '16%',
     width: '100%'
   }
 });

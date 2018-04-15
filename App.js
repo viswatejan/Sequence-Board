@@ -7,9 +7,7 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Image resizeMode="stretch" style={styles.logo} source={require('./assets/images/cards/BLUE_BACK.png')} />
           <Text style={styles.title}>SEQUENCE</Text>
-          <Image resizeMode="stretch" style={styles.logo} source={require('./assets/images/cards/RED_BACK.png')} />
         </View>
         <View style={styles.boardContainer}>
           <Board></Board>
@@ -22,7 +20,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#000',
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -32,13 +30,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  logo: {
-    width: 22,
-    height: 24
-  },
   title: {
     fontSize: 24,
-    color: '#045A1C',
+    color: '#ccc',
     marginLeft: 10,
     marginRight: 10 
   },

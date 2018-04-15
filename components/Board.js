@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     },
     chip: {
         width: '10%',
-        height: '7%',
+        height: '6.5%',
         alignSelf: 'center',
         margin: 10,
     }

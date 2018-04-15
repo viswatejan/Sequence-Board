@@ -49,10 +49,10 @@ export default class Card extends React.Component {
 
         if (this.state.card) {
             if (this.state.card.player) {
-                _chip = (<Image resizeMode="center" if style={styles.chip} source={ImageAssets.getSource(this.state.card.player)} />);
+                _chip = (<Image resizeMethod="resize" resizeMode="center" if style={styles.chip} source={ImageAssets.getSource(this.state.card.player)} />);
             }
             _card = (
-                <ImageBackground resizeMode="contain" style={styles.card} source={ImageAssets.getSource(this.state.card.type)}>
+                <ImageBackground resizeMethod="resize" resizeMode="contain" style={styles.card} source={ImageAssets.getSource(this.state.card.type)}>
                     {_chip}
                 </ImageBackground>);
         }

@@ -49,7 +49,7 @@ export default class Board extends React.Component {
         return (
             <View style={styles.board}>
                 {rows}
-                <Image style={styles.chip} resizeMode="stretch" source={require('../assets/images/chips/BLUE.png')} />
+                <Image style={styles.chip} resizeMethod="resize" resizeMode="stretch" source={require('../assets/images/chips/BLUE.png')} />
             </View>
         );
     }

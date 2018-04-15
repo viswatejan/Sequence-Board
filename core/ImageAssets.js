@@ -1,4 +1,4 @@
-const imageAssets = {
+const assets = {
     'AC': {
         uri: require('../assets/images/cards/AC.png')
     },
@@ -166,4 +166,8 @@ const imageAssets = {
     }
 };
 
-export default imageAssets;
+export default class ImageAssets{
+    static getSource(type) {
+        return assets[type].uri;
+    }
+}

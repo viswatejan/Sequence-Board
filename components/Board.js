@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, Image } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 import Row from './Row';
 import CardModel from '../core/CardModel';
 
@@ -23,7 +23,7 @@ export default class Board extends React.Component {
 
     currentPlayer = 0;
 
-    changePlayer(){
+    changePlayer() {
         this.currentPlayer = abs(this.currentPlayer - 1);
     }
 
@@ -49,9 +49,7 @@ export default class Board extends React.Component {
         return (
             <View style={styles.board}>
                 {rows}
-                {/* <View style={styles.info}> */}
-                    <Image style={styles.chip} resizeMode="stretch" source={require('../assets/images/chips/BLUE.png')}/>
-                {/* </View> */}
+                <Image style={styles.chip} resizeMode="stretch" source={require('../assets/images/chips/BLUE.png')} />
             </View>
         );
     }

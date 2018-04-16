@@ -2,11 +2,7 @@ import React from 'react';
 import { Image, ImageBackground, View, StyleSheet, TouchableOpacity } from 'react-native';
 import ImageAssets from '../core/ImageAssets';
 
-const players = ['BLUE', 'GREEN'];
-
 export default class Card extends React.Component {
-    static currentPlayer = 0;
-
     constructor(props) {
         super(props);
         this.state = {
@@ -21,18 +17,17 @@ export default class Card extends React.Component {
         this.setState({ card });
     }
 
-    changePlayer() {
-        Card.currentPlayer = Math.abs(Card.currentPlayer - 1);
-    }
-
-    toggleChip(remove){
-        if(this.state.card.type === 'BACK'){
+    toggleChip(remove) {
+        if (this.state.card.type === 'BACK') {
+            return;
+        }
+        if (this.state.card.player && !remove) {
             return;
         }
         let { card } = this.state;
-        card.player = remove ? null : players[Card.currentPlayer];
+        card.player = remove ? null : this.props.player;
         this.setState({ card });
-        this.changePlayer();
+        this.props.playerChanged();
     }
 
     _onCardPress() {

@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 import Row from './Row';
 import CardModel from '../core/CardModel';
-
+import ImageAssets from '../core/ImageAssets';
 const sequence = [
     ['BACK', '6D', '7D', '8D', '9D', '10D', 'QD', 'KD', 'AD', 'BACK'],
     ['5D', '3H', '2H', '2S', '3S', '4S', '5S', '6S', '7S', 'AS'],
@@ -23,8 +23,29 @@ export default class Board extends React.Component {
 
     currentPlayer = 0;
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            player: 'BLUE',
+            oldPlayer: 'GREEN'
+        };
+    }
+
+    getNextPlayer() {
+        this.changePlayer();
+        return players[this.currentPlayer];
+    }
+
+    _playerChanged = () => {
+        newState = {
+            oldPlayer: this.state.player,
+            player: this.getNextPlayer()
+        };
+        this.setState(newState);
+    };
+
     changePlayer() {
-        this.currentPlayer = abs(this.currentPlayer - 1);
+        this.currentPlayer = Math.abs(this.currentPlayer - 1);
     }
 
     initCardSequence() {
@@ -44,12 +65,13 @@ export default class Board extends React.Component {
             this.initCardSequence();
         }
         console.log(this.initCardSequence);
-        rows = this.cardsSequence.map((row) => <Row key={row[0].id} cards={row}></Row>);
+        rows = this.cardsSequence.map((row) => <Row key={row[0].id} cards={row} player={this.state.player} playerChanged={this._playerChanged} ></Row>);
 
         return (
             <View style={styles.board}>
                 {rows}
-                <Image style={styles.chip} resizeMethod="resize" resizeMode="stretch" source={require('../assets/images/chips/BLUE.png')} />
+                <Image style={styles.chip} resizeMethod="resize" resizeMode="stretch" source={ImageAssets.getSource(this.state.player)} />
+                <Image style={styles.chip} resizeMethod="resize" resizeMode="stretch" source={ImageAssets.getSource(this.state.oldPlayer)} />
             </View>
         );
     }

@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     marginRight: 10 
   },
   boardContainer: {
-    flexBasis: '80%',
+    flexBasis: '90%',
     width: '100%'
   }
 });

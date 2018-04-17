@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image, TouchableWithoutFeedback  } from 'react-native';
 import Row from './Row';
 import CardModel from '../core/CardModel';
 import ImageAssets from '../core/ImageAssets';
@@ -26,8 +26,7 @@ export default class Board extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            player: 'BLUE',
-            oldPlayer: 'GREEN'
+            player: 'BLUE'
         };
     }
 
@@ -38,7 +37,6 @@ export default class Board extends React.Component {
 
     _playerChanged = () => {
         newState = {
-            oldPlayer: this.state.player,
             player: this.getNextPlayer()
         };
         this.setState(newState);
@@ -64,14 +62,17 @@ export default class Board extends React.Component {
         if (!this.cardsSequence) {
             this.initCardSequence();
         }
-        console.log(this.initCardSequence);
+
         rows = this.cardsSequence.map((row) => <Row key={row[0].id} cards={row} player={this.state.player} playerChanged={this._playerChanged} ></Row>);
 
         return (
             <View style={styles.board}>
                 {rows}
-                <Image style={styles.chip} resizeMethod="resize" resizeMode="stretch" source={ImageAssets.getSource(this.state.player)} />
-                <Image style={styles.chip} resizeMethod="resize" resizeMode="stretch" source={ImageAssets.getSource(this.state.oldPlayer)} />
+                <View style={styles.playerStatus}>
+                    <TouchableWithoutFeedback  onPress={this._playerChanged}>
+                        <Image style={styles.chip} resizeMode="contain" source={ImageAssets.getSource(this.state.player)} />
+                    </TouchableWithoutFeedback >
+                </View>
             </View>
         );
     }
@@ -89,10 +90,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
+    playerStatus: {
+        flex: 1,
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     chip: {
         width: '10%',
-        height: '6.5%',
-        alignSelf: 'center',
+        height: '100%',
         margin: 10,
     }
 });

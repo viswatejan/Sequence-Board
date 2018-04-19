@@ -17,3 +17,4 @@ yarn-debug.log*
 yarn-error.log*
 android/.gradle/*
 android/app/build/*
+android/build/intermediates/dex-cache/cache.xml

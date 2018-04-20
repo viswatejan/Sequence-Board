@@ -17,7 +17,9 @@ yarn-debug.log*
 yarn-error.log*
 android/.gradle/*
 android/app/build/*
+android/build/*
 android/build/intermediates/dex-cache/cache.xml
+android/.idea/*
 
 # BUCK
 buck-out/
@@ -37,3 +39,5 @@ buck-out/
 
 # Bundle artifact
 *.jsbundle
+*.iml
+android/local.properties

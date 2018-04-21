@@ -1,4 +1,4 @@
-package com.sequenceboard;
+package com.viswa.sequenceboard;
 
 import android.view.View;
 import android.view.WindowManager;

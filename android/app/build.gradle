@@ -107,8 +107,6 @@ android {
             abiFilters "armeabi-v7a", "x86"
         }
     }
-    signingConfigs {
-    }
     splits {
         abi {
             reset()

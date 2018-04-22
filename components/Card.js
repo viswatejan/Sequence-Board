@@ -43,14 +43,16 @@ export default class Card extends React.Component {
     }
 
     _onCardPress() {
-        this.placeSound.play(); 
-        this.toggleChip();
+        if(this.state.card && !this.state.card.player){
+            this.toggleChip();
+            this.placeSound.play(); 
+        }
     }
 
     _onCardLongPress() {
         if(this.state.card && this.state.card.player){
-            this.removeSound.play();
             this.toggleChip(true);
+            this.removeSound.play();
         }
     }
 

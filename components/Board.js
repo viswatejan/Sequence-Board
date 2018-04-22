@@ -46,11 +46,11 @@ export default class Board extends React.Component {
     }
 
     _playerChanged = (manual) => {
-        manual && this.selectSound.play();
         newState = {
             player: this.getNextPlayer()
         };
         this.setState(newState);
+        manual && this.selectSound.play();
     };
 
     _playerChangedManually = () => {

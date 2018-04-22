@@ -1,8 +1,13 @@
 import React from 'react';
 import { Image, ImageBackground, View, StyleSheet, TouchableOpacity } from 'react-native';
 import ImageAssets from '../core/ImageAssets';
+import SoundAssets from '../core/SoundAssets';
+import Sound from 'react-native-sound';
+
+Sound.setCategory('Playback');
 
 export default class Card extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -10,11 +15,18 @@ export default class Card extends React.Component {
         };
         this._onCardPress = this._onCardPress.bind(this);
         this._onCardLongPress = this._onCardLongPress.bind(this);
+        this.placeSound = new Sound(SoundAssets.placeSound, SoundAssets.callback);
+        this.removeSound = new Sound(SoundAssets.removeSound, SoundAssets.callback);
     }
 
     componentDidMount() {
         const { card } = this.props;
         this.setState({ card });
+    }
+
+    componentWillUnmount() {
+        this.placeSound.release();
+        this.removeSound.release();
     }
 
     toggleChip(remove) {
@@ -31,11 +43,15 @@ export default class Card extends React.Component {
     }
 
     _onCardPress() {
+        this.placeSound.play(); 
         this.toggleChip();
     }
 
     _onCardLongPress() {
-        this.toggleChip(true);
+        if(this.state.card && this.state.card.player){
+            this.removeSound.play();
+            this.toggleChip(true);
+        }
     }
 
     render() {

@@ -3,6 +3,11 @@ import { View, StyleSheet, Image, TouchableWithoutFeedback  } from 'react-native
 import Row from './Row';
 import CardModel from '../core/CardModel';
 import ImageAssets from '../core/ImageAssets';
+import SoundAssets from '../core/SoundAssets';
+import Sound from 'react-native-sound';
+
+Sound.setCategory('Playback');
+
 const sequence = [
     ['BACK', '6D', '7D', '8D', '9D', '10D', 'QD', 'KD', 'AD', 'BACK'],
     ['5D', '3H', '2H', '2S', '3S', '4S', '5S', '6S', '7S', 'AS'],
@@ -28,6 +33,11 @@ export default class Board extends React.Component {
         this.state = {
             player: 'BLUE'
         };
+        this.selectSound = new Sound(SoundAssets.selectSound, SoundAssets.callback);
+    }
+
+    componentWillUnmount() {
+        this.selectSound.release();
     }
 
     getNextPlayer() {
@@ -35,12 +45,17 @@ export default class Board extends React.Component {
         return players[this.currentPlayer];
     }
 
-    _playerChanged = () => {
+    _playerChanged = (manual) => {
+        manual && this.selectSound.play();
         newState = {
             player: this.getNextPlayer()
         };
         this.setState(newState);
     };
+
+    _playerChangedManually = () => {
+        this._playerChanged(true);
+    }
 
     changePlayer() {
         this.currentPlayer = Math.abs(this.currentPlayer - 1);
@@ -69,7 +84,7 @@ export default class Board extends React.Component {
             <View style={styles.board}>
                 {rows}
                 <View style={styles.playerStatus}>
-                    <TouchableWithoutFeedback  onPress={this._playerChanged}>
+                    <TouchableWithoutFeedback  onPress={this._playerChangedManually}>
                         <Image style={styles.chip} resizeMode="contain" source={ImageAssets.getSource(this.state.player)} />
                     </TouchableWithoutFeedback >
                 </View>

@@ -43,3 +43,4 @@ buck-out/
 android/local.properties
 
 *.jks
+/package-lock.json

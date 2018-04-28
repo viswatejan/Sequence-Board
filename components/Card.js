@@ -3,6 +3,8 @@ import { Image, ImageBackground, View, StyleSheet, TouchableOpacity } from 'reac
 import ImageAssets from '../core/ImageAssets';
 import SoundAssets from '../core/SoundAssets';
 import Sound from 'react-native-sound';
+import store from '../core/sequenceStore';
+import  { placeChip, removeChip } from '../core/Actions';
 
 Sound.setCategory('Playback');
 
@@ -10,18 +12,10 @@ export default class Card extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            card: null
-        };
         this._onCardPress = this._onCardPress.bind(this);
         this._onCardLongPress = this._onCardLongPress.bind(this);
         this.placeSound = new Sound(SoundAssets.placeSound, SoundAssets.callback);
         this.removeSound = new Sound(SoundAssets.removeSound, SoundAssets.callback);
-    }
-
-    componentDidMount() {
-        const { card } = this.props;
-        this.setState({ card });
     }
 
     componentWillUnmount() {
@@ -29,29 +23,16 @@ export default class Card extends React.Component {
         this.removeSound.release();
     }
 
-    toggleChip(remove) {
-        if (this.state.card.type === 'BACK') {
-            return;
-        }
-        if (this.state.card.player && !remove) {
-            return;
-        }
-        let { card } = this.state;
-        card.player = remove ? null : this.props.player;
-        this.setState({ card });
-        this.props.playerChanged();
-    }
-
     _onCardPress() {
-        if(this.state.card && !this.state.card.player){
-            this.toggleChip();
+        if(this.props.card && this.props.card.type !== 'BACK' && !this.props.card.player){
+            store.dispatch(placeChip(this.props.card))
             this.placeSound.play(); 
         }
     }
 
     _onCardLongPress() {
-        if(this.state.card && this.state.card.player){
-            this.toggleChip(true);
+        if(this.props.card && this.props.card.type !== 'BACK' && this.props.card.player){
+            store.dispatch(removeChip(this.props.card))
             this.removeSound.play();
         }
     }
@@ -60,12 +41,12 @@ export default class Card extends React.Component {
         _chip = null;
         _card = null;
 
-        if (this.state.card) {
-            if (this.state.card.player) {
-                _chip = (<Image resizeMode="center" if style={styles.chip} source={ImageAssets.getSource(this.state.card.player)} />);
+        if (this.props.card) {
+            if (this.props.card.player) {
+                _chip = (<Image resizeMode="center" if style={styles.chip} source={ImageAssets.getSource(this.props.card.player)} />);
             }
             _card = (
-                <ImageBackground resizeMode="contain" style={styles.card} source={ImageAssets.getSource(this.state.card.type)}>
+                <ImageBackground resizeMode="contain" style={styles.card} source={ImageAssets.getSource(this.props.card.type)}>
                     {_chip}
                 </ImageBackground>);
         }
@@ -91,7 +72,6 @@ const styles = StyleSheet.create({
         width: '50%',
         height: '50%',
         flex: 1,
-        // alignSelf: 'center',
         alignItems: 'center'
     }
 });

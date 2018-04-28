@@ -1,8 +1,18 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import Board from './components/Board';
+import store from './core/sequenceStore';
 
 export default class App extends React.Component {
+  
+  constructor(props){
+    super(props);
+    this.state = store.getState();
+    store.subscribe(() => {
+      this.setState(store.getState())
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -10,7 +20,7 @@ export default class App extends React.Component {
           <Text style={styles.title}>SEQUENCE</Text>
         </View>
         <View style={styles.boardContainer}>
-          <Board></Board>
+          <Board cardsSequence={this.state.cardsSequence} player={this.state.player}></Board>
         </View>
       </View>
     );

@@ -3,13 +3,8 @@ import { View, StyleSheet } from 'react-native';
 import Card from './Card';
 
 export default class Row extends React.Component {
-
-    _playerChanged = () => {
-        this.props.playerChanged();
-    };
-
     render() {
-        cards = this.props.cards.map((card) => <Card key={card.id} card={card} player={this.props.player} playerChanged={this._playerChanged}></Card>);
+        cards = this.props.cards.map(card => <Card key={card.id} card={card}/>);
         return (
             <View style={styles.row}>
                 {cards}
